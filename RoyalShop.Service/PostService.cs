@@ -55,12 +55,12 @@ namespace RoyalShop.Service
         public IEnumerable<Post> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRows)
         {
             //TODO: Select on post by tag
-            return _postRepository.GetMultiPaging(x => x.Status,out totalRows,page,pageSize);
+            return _postRepository.GetAllByTag(tag, page, pageSize, out totalRows);
         }
 
         public IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalRow)
         {
-            throw new NotImplementedException();
+            return _postRepository.GetMultiPaging(x => x.Status, out totalRow, page, pageSize);
         }
 
         public Post GetById(int id)
