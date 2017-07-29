@@ -5,6 +5,9 @@ using System.Web.Http;
 using RoyalShop.App.Infrastructure.Core;
 using RoyalShop.Model.Models;
 using RoyalShop.Service;
+using AutoMapper;
+using RoyalShop.App.Models;
+using RoyalShop.App.Infrastructure.Extensions;
 
 namespace RoyalShop.App.API
 {
@@ -26,6 +29,8 @@ namespace RoyalShop.App.API
             {
                     var listCategory = _postCategoryService.GetAll();
 
+                var listPostCategoryVM = Mapper.Map<List<PostCategoryViewModel>>(listCategory);
+
                     HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listCategory);
 
                     return response;
@@ -33,7 +38,8 @@ namespace RoyalShop.App.API
         }
 
         //Create
-        public HttpResponseMessage Post(HttpRequestMessage request, PostCategory postCategory)
+        [Route("add")]
+        public HttpResponseMessage Post(HttpRequestMessage request, PostCategoryViewModel postCategoryVM)
         {
             return CreateHttpResponse(request, () =>
              {
@@ -44,6 +50,8 @@ namespace RoyalShop.App.API
                  }
                  else
                  {
+                     PostCategory postCategory = new PostCategory();
+                     postCategory.UpdatePostCategory(postCategoryVM);
                      var category = _postCategoryService.Add(postCategory);
                      _postCategoryService.Save();
 
@@ -54,7 +62,8 @@ namespace RoyalShop.App.API
         }
 
         //Update
-        public HttpResponseMessage Put(HttpRequestMessage request, PostCategory postCategory)
+        [Route("update")]
+        public HttpResponseMessage Put(HttpRequestMessage request, PostCategoryViewModel postCategoryVM)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -65,7 +74,9 @@ namespace RoyalShop.App.API
                 }
                 else
                 {
-                    _postCategoryService.Update(postCategory);
+                    var postCategoryDb = _postCategoryService.GetById(postCategoryVM.ID);
+                    postCategoryDb.UpdatePostCategory(postCategoryVM);
+                    _postCategoryService.Update(postCategoryDb);
                     _postCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.OK);//HttpStatusCode.OK: lỗi 200
