@@ -1,9 +1,10 @@
-﻿using RoyalShop.Model.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using RoyalShop.Model.Models;
 using System.Data.Entity;
 
 namespace RoyalShop.Data
 {
-    public class RoyalShopDbContext : DbContext
+    public class RoyalShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public RoyalShopDbContext() : base("RoyalShopConnection")
         {
@@ -45,9 +46,14 @@ namespace RoyalShop.Data
 
         protected override void OnModelCreating(DbModelBuilder builder) // ghi đè phương thức OnModelCreating trong DbContext
         {
+            //đặt khoá chính
+            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
+            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
+
+            //đặt khoá chính
             //builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");
             //builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationUserLogins");
-            //builder.Entity<IdentityRole>().ToTable("ApplicationRoles");
+            ////builder.Entity<IdentityRole>().ToTable("ApplicationRoles");
             //builder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationUserClaims");
         }
     }
