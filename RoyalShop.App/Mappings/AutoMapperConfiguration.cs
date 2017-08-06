@@ -8,9 +8,9 @@ namespace RoyalShop.App.Mappings
     {
         public static void Configure()
         {
-            Mapper.CreateMap<Post, PostViewModel>();
-            Mapper.CreateMap<PostCategory, PostCategoryViewModel>();
-            Mapper.CreateMap<Tag, TagViewModel>();
+            //Mapper.CreateMap<Post, PostViewModel>();
+            //Mapper.CreateMap<PostCategory, PostCategoryViewModel>();
+            //Mapper.CreateMap<Tag, TagViewModel>();
         }
     }
 }
