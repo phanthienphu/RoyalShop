@@ -228,6 +228,7 @@
     <Content Include="Scripts\plugins\angular\angular.js" />
     <Content Include="Scripts\plugins\angular\angular.min.js" />
     <Content Include="Scripts\plugins\angular\index.js" />
+    <Content Include="Scripts\spa\app.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -242,7 +243,6 @@
     <Folder Include="bin\" />
     <Folder Include="Common\Admin\libs\" />
     <Folder Include="Common\Client\" />
-    <Folder Include="Scripts\spa\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
