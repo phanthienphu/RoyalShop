@@ -3,23 +3,28 @@
 var myApp = angular.module("myModule", []);
 
 myApp.controller("SchoolController", SchoolController);
-myApp.controller("StudentController", StudentController);
-myApp.controller("TeacherController", TeacherController);
+myApp.service("Validator", Validator);
 
-//myApp.$inject = ['$scope']; //hoạt động bình thường khi bỏ ở file ko phải dạng nén, khi nén file ở dạng .min sẽ bị lỗi
-//declare
-//function StudentController($rootScope,$scope) {
-//    $rootScope.message = "This is my message from Student";
-//};
+SchoolController.$inject = ['$scope', 'Validator'];
 
-function SchoolController($Scope) {
-    $Scope.message = "Announcement from school.";
+function SchoolController($scope, Validator) {
+    
+    $scope.checkNumber = function ()
+    {
+        $scope.message = Validator.checkNumber($scope.number);
+    }
+    $scope.number = 1
 };
 
-function StudentController($scope) {
-    $Scope.message = "This is my message from Student";
+function Validator($window) {
+    return{
+        checkNumber: checkNumber
+    }
+    function checkNumber(input) {
+        if (input % 2 == 0)
+            return "This is even";
+        else
+            return "This is odd";
+    }
 };
 
-function TeacherController($scope) {
-   $scope.message = "This is my message from Teacher";
-}
