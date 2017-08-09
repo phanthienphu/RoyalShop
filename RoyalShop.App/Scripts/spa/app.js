@@ -3,20 +3,23 @@
 var myApp = angular.module("myModule", []);
 
 myApp.controller("SchoolController", SchoolController);
-myApp.service("Validator", Validator);
 
-SchoolController.$inject = ['$scope', 'Validator'];
+myApp.directive("royalShopDirective", royalShopDirective);
 
-function SchoolController($scope, Validator) {
+myApp.service("ValidatorService", ValidatorService);
+
+SchoolController.$inject = ['$scope', 'ValidatorService'];
+
+function SchoolController($scope, ValidatorService) {
     
     $scope.checkNumber = function ()
     {
-        $scope.message = Validator.checkNumber($scope.number);
+        $scope.message = ValidatorService.checkNumber($scope.number);
     }
     $scope.number = 1
 };
 
-function Validator($window) {
+function ValidatorService($window) {
     return{
         checkNumber: checkNumber
     }
@@ -27,4 +30,11 @@ function Validator($window) {
             return "This is odd";
     }
 };
+
+function royalShopDirective() {
+    return {
+        restrict:"E";
+        template: "<h1>What is this?</h1>"
+    }
+}
 

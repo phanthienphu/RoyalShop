@@ -13,7 +13,8 @@
     <script src="~/Scripts/spa/app.js"></script>
 </head>
 <body>
-    <div ng-controller="SchoolController">
+    <div ng-controller="SchoolController">  
+        <royal-shop-directive></royal-shop-directive>
        <input type="number" ng-model="number"/> value: {{number}}
         <button ng-click="checkNumber()">Check</button>
         <br />
