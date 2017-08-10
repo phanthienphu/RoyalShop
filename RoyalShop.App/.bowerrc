@@ -1,4 +1,3 @@
 {
-  //"directory": "Common/Admin/libs"
-  "directory": "Scripts/plugins"
+  "directory": "Common/Admin/libs"
 }
