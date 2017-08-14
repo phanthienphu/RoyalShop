@@ -1,6 +1,10 @@
 ﻿/// <reference path="\Common/Admin/libs/angular/angular.js" />
 (function(){
-    angular.module("royalshop", ["royalshop.products", "royalshop.common"]).config(config);
+    angular.module("royalshop",
+        ["royalshop.products",
+          "royalshop.product_categories",
+          "royalshop.common"])
+          .config(config);
 
     config.$inject = ["$stateProvider", "$urlRouterProvider"];
 

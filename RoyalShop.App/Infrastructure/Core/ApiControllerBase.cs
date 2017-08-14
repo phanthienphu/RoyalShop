@@ -30,7 +30,7 @@ namespace RoyalShop.App.Infrastructure.Core
             {
                 foreach (var eve in ex.EntityValidationErrors)
                 {
-                    //kiểu chuỗi trong cs6. Trace.WriteLineghi lỗi vào console
+                    //kiểu chuỗi trong cs6. Trace.WriteLine ghi lỗi vào console
                     Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
                     foreach (var ve in eve.ValidationErrors)
                     {

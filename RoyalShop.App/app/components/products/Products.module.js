@@ -1,4 +1,4 @@
-﻿/// <reference path="\Common/Admin/libs/angular/angular.js" />
+﻿/// <reference path="/Common/Admin/libs/angular/angular.js" />
 (function () {
     angular.module("royalshop.products", ["royalshop.common"]).config(config);
 
