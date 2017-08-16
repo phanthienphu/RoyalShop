@@ -6,13 +6,24 @@
     ProductCategoryListController.$inject = ["$scope","apiService"];
     function ProductCategoryListController($scope, apiService) {
         $scope.productCategories = [];
-
+        $scope.page = 0;
+        $scope.pagesCount = 0;
         $scope.getProductCategories = getProductCategories;
 
-        function getProductCategories() {
+        function getProductCategories(page) {
+            page = page || 0;
+            var config = {
+                params: {
+                    page: page,
+                    pageSize: 2
+                }
+            }
             //url web API
-            apiService.get("/api/productcategory/getall", null, function (resuilt) {
-                $scope.productCategories = resuilt.data;
+            apiService.get("/api/productcategory/getall", config, function (resuilt) {
+                $scope.productCategories = resuilt.data.Items;
+                $scope.page = resuilt.data.Page;
+                $scope.pagesCount = resuilt.data.TotalPages;
+                $scope.totalCount = resuilt.data.TotalCount;
             }, function () {
                 console.log("Load productcategory failed!");
             });
