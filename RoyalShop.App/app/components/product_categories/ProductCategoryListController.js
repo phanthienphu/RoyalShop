@@ -9,13 +9,20 @@
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.getProductCategories = getProductCategories;
+        $scope.keyword = "";
 
+        $scope.Search = Search;
+
+        function Search() {
+            getProductCategories();
+        }
         function getProductCategories(page) {
             page = page || 0;
             var config = {
                 params: {
+                    keyword: $scope.keyword,
                     page: page,
-                    pageSize: 2
+                    pageSize: 20
                 }
             }
             //url web API

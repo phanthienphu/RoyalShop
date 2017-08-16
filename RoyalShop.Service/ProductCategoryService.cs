@@ -18,6 +18,7 @@ namespace RoyalShop.Service
         ProductCategory Delete(int id);
 
         IEnumerable<ProductCategory> GetAll();
+        IEnumerable<ProductCategory> GetAll(string keyword);
 
         IEnumerable<ProductCategory> GetAllByParentId(int parentId);
 
@@ -28,38 +29,46 @@ namespace RoyalShop.Service
 
     public class ProductCategoryService : IProductCategoryService
     {
-        private IProductCategoryRepository _postCategoryRepository;
+        private IProductCategoryRepository _ProductCategoryRepository;
         private IUnitOfWork _unitOfWork;
 
         public ProductCategoryService(IProductCategoryRepository postCategoryRepository, IUnitOfWork unitOfWork)
         {
-            this._postCategoryRepository = postCategoryRepository;
+            this._ProductCategoryRepository = postCategoryRepository;
             this._unitOfWork = unitOfWork;
         }
 
         public ProductCategory Add(ProductCategory postCategory)
         {
-            return _postCategoryRepository.Add(postCategory);
+            return _ProductCategoryRepository.Add(postCategory);
         }
 
         public ProductCategory Delete(int id)
         {
-            return _postCategoryRepository.Delete(id);
+            return _ProductCategoryRepository.Delete(id);
         }
 
         public IEnumerable<ProductCategory> GetAll()
         {
-            return _postCategoryRepository.GetAll();
+            return _ProductCategoryRepository.GetAll();
+        }
+
+        public IEnumerable<ProductCategory> GetAll(string keyword)
+        {
+            if (!string.IsNullOrEmpty(keyword))
+                return _ProductCategoryRepository.GetMulti(x => x.Name.Contains(keyword) || x.Description.Contains(keyword));
+            else
+                return _ProductCategoryRepository.GetAll();
         }
 
         public IEnumerable<ProductCategory> GetAllByParentId(int parentId)
         {
-            return _postCategoryRepository.GetMulti(x => x.Status && x.ParentID == parentId);
+            return _ProductCategoryRepository.GetMulti(x => x.Status && x.ParentID == parentId);
         }
 
         public ProductCategory GetById(int id)
         {
-            return _postCategoryRepository.GetSingleById(id);
+            return _ProductCategoryRepository.GetSingleById(id);
         }
 
         public void Save()
@@ -69,7 +78,7 @@ namespace RoyalShop.Service
 
         public void Update(ProductCategory postCategory)
         {
-            _postCategoryRepository.Update(postCategory);
+            _ProductCategoryRepository.Update(postCategory);
         }
     }
 }
