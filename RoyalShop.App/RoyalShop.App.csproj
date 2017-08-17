@@ -238,6 +238,7 @@
     <Content Include="app\shared\filters\StatusFilter.js" />
     <Content Include="app\shared\modules\RoyalShop.common.js" />
     <Content Include="app\shared\services\ApiService.js" />
+    <Content Include="app\shared\services\NotificationService.js" />
     <Content Include="Common\Admin\css\AdminLTE.css" />
     <Content Include="Common\Admin\css\AdminLTE.min.css" />
     <Content Include="Common\Admin\css\alt\AdminLTE-bootstrap-social.css" />
@@ -494,6 +495,10 @@
     <Content Include="Common\Admin\libs\slimScroll\examples\style.css" />
     <Content Include="Common\Admin\libs\slimScroll\jquery.slimscroll.js" />
     <Content Include="Common\Admin\libs\slimScroll\jquery.slimscroll.min.js" />
+    <Content Include="Common\Admin\libs\toastr\toastr.css" />
+    <Content Include="Common\Admin\libs\toastr\toastr.js" />
+    <Content Include="Common\Admin\libs\toastr\toastr.min.css" />
+    <Content Include="Common\Admin\libs\toastr\toastr.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -671,6 +676,13 @@
     <Content Include="Common\Admin\libs\slimScroll\bower.json" />
     <Content Include="Common\Admin\libs\slimScroll\package.json" />
     <Content Include="Common\Admin\libs\slimScroll\README.md" />
+    <Content Include="Common\Admin\libs\toastr\.bower.json" />
+    <Content Include="Common\Admin\libs\toastr\bower.json" />
+    <Content Include="Common\Admin\libs\toastr\LICENSE" />
+    <Content Include="Common\Admin\libs\toastr\README.md" />
+    <Content Include="Common\Admin\libs\toastr\toastr.js.map" />
+    <Content Include="Common\Admin\libs\toastr\toastr.less" />
+    <Content Include="Common\Admin\libs\toastr\toastr.scss" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>

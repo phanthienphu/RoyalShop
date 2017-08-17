@@ -1,10 +1,10 @@
-﻿/// <reference path="D:\THIENPHU_ID\hoctap\Online\NET_MVC5_Entity_Angular1_API\Git\RoyalShop.App\Common/Admin/libs/angular/angular.js" />
+﻿/// <reference path="/Common/Admin/libs/angular/angular.js" />
 
 (function (app) {
     app.controller("ProductCategoryListController", ProductCategoryListController);
 
-    ProductCategoryListController.$inject = ["$scope","apiService"];
-    function ProductCategoryListController($scope, apiService) {
+    ProductCategoryListController.$inject = ["$scope", "apiService", "notificationService"];
+    function ProductCategoryListController($scope, apiService, notificationService) {
         $scope.productCategories = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
@@ -27,6 +27,14 @@
             }
             //url web API
             apiService.get("/api/productcategory/getall", config, function (resuilt) {
+                if (resuilt.data.TotalCount == 0)
+                {
+                    notificationService.displayWarning("Không tìm thấy bản ghi nào!");
+                }
+                else
+                {
+                    notificationService.displaySuccess("Tìm kiếm thành công! có " + resuilt.data.TotalCount + " bản ghi được tìm thấy!");
+                }
                 $scope.productCategories = resuilt.data.Items;
                 $scope.page = resuilt.data.Page;
                 $scope.pagesCount = resuilt.data.TotalPages;
