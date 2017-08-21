@@ -31,10 +31,6 @@
                 {
                     notificationService.displayWarning("Không tìm thấy bản ghi nào!");
                 }
-                else
-                {
-                    notificationService.displaySuccess("Tìm kiếm thành công! có " + resuilt.data.TotalCount + " bản ghi được tìm thấy!");
-                }
                 $scope.productCategories = resuilt.data.Items;
                 $scope.page = resuilt.data.Page;
                 $scope.pagesCount = resuilt.data.TotalPages;
