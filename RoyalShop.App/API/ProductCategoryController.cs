@@ -13,9 +13,11 @@ using System.Web.Http;
 
 namespace RoyalShop.App.API
 {
+    
     [RoutePrefix("api/productcategory")]
     public class ProductCategoryController : ApiControllerBase
     {
+        #region Initialize
         private IProductCategoryService _productCategoryService;
 
         public ProductCategoryController(IErrorService errorService, IProductCategoryService productCategoryService)
@@ -23,6 +25,7 @@ namespace RoyalShop.App.API
         {
             this._productCategoryService = productCategoryService;
         }
+        #endregion
 
         [Route("getall")]
         [HttpGet]
@@ -64,6 +67,21 @@ namespace RoyalShop.App.API
             });
         }
 
+        [Route("getbyid/{id:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetById(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productCategoryService.GetById(id);
+
+                var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(model);
+
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                return response;
+            });
+        }
+
         [Route("Create")]
         [HttpPost]
         [AllowAnonymous] //cho phép post nặc danh ko cần đăng nhập
@@ -80,9 +98,37 @@ namespace RoyalShop.App.API
                 {
                     var newPorductCategory = new ProductCategory();
                     newPorductCategory.UpdateProductCategory(productCategoryVM);
+                    newPorductCategory.CreatedDate = DateTime.Now;
                     _productCategoryService.Add(newPorductCategory);
                     _productCategoryService.Save();
                     var responseDate = Mapper.Map<ProductCategory, ProductCategoryViewModel>(newPorductCategory);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseDate);
+                }
+
+                return response;
+            });
+        }
+
+        [Route("update")]
+        [HttpPut]
+        [AllowAnonymous] //cho phép post nặc danh ko cần đăng nhập
+        public HttpResponseMessage Update(HttpRequestMessage request, ProductCategoryViewModel productCategoryVM)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);//error 400
+                }
+                else
+                {
+                    var dbPorductCategory = _productCategoryService.GetById(productCategoryVM.ID);
+                    dbPorductCategory.UpdateProductCategory(productCategoryVM);
+                    dbPorductCategory.UpdatedDate = DateTime.Now;
+                    _productCategoryService.Update(dbPorductCategory);
+                    _productCategoryService.Save();
+                    var responseDate = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbPorductCategory);
                     response = request.CreateResponse(HttpStatusCode.Created, responseDate);
                 }
 

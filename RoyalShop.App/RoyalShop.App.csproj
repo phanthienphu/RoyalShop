@@ -233,6 +233,8 @@
     <Content Include="app\components\product_categories\ProductCategory.module.js" />
     <Content Include="app\components\product_categories\ProductCategoryAddController.js" />
     <Content Include="app\components\product_categories\ProductCategoryAddView.html" />
+    <Content Include="app\components\product_categories\ProductCategoryEditController.js" />
+    <Content Include="app\components\product_categories\ProductCategoryEditView.html" />
     <Content Include="app\components\product_categories\ProductCategoryListController.js" />
     <Content Include="app\components\product_categories\ProductCategoryListView.html" />
     <Content Include="app\shared\directives\PagerDirective.html" />
@@ -240,6 +242,7 @@
     <Content Include="app\shared\filters\StatusFilter.js" />
     <Content Include="app\shared\modules\RoyalShop.common.js" />
     <Content Include="app\shared\services\ApiService.js" />
+    <Content Include="app\shared\services\CommonService.js" />
     <Content Include="app\shared\services\NotificationService.js" />
     <Content Include="Common\Admin\css\AdminLTE.css" />
     <Content Include="Common\Admin\css\AdminLTE.min.css" />
