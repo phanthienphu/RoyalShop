@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -25,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -254,6 +256,8 @@
     <Content Include="Common\Admin\css\alt\AdminLTE-select2.min.css" />
     <Content Include="Common\Admin\css\alt\AdminLTE-without-plugins.css" />
     <Content Include="Common\Admin\css\alt\AdminLTE-without-plugins.min.css" />
+    <Content Include="Common\Admin\css\Custom.css" />
+    <Content Include="Common\Admin\css\skins\Custom.css" />
     <Content Include="Common\Admin\css\skins\skin-black-light.css" />
     <Content Include="Common\Admin\css\skins\skin-black-light.min.css" />
     <Content Include="Common\Admin\css\skins\skin-black.css" />
@@ -367,6 +371,36 @@
     <Content Include="Common\Admin\libs\boostrap\js\tooltip.js" />
     <Content Include="Common\Admin\libs\boostrap\js\transition.js" />
     <Content Include="Common\Admin\libs\boostrap\package.js" />
+    <Content Include="Common\Admin\libs\bootbox\.gitignore" />
+    <Content Include="Common\Admin\libs\bootbox\bootbox.js" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\js\npm.js" />
+    <Content Include="Common\Admin\libs\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Common\Admin\libs\bootstrap\Gruntfile.js" />
+    <Content Include="Common\Admin\libs\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="Common\Admin\libs\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="Common\Admin\libs\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="Common\Admin\libs\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="Common\Admin\libs\bootstrap\grunt\change-version.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\affix.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\alert.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\button.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\carousel.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\collapse.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\dropdown.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\modal.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\popover.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\scrollspy.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\tab.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\tooltip.js" />
+    <Content Include="Common\Admin\libs\bootstrap\js\transition.js" />
+    <Content Include="Common\Admin\libs\bootstrap\package.js" />
     <Content Include="Common\Admin\libs\fastclick\lib\fastclick.js" />
     <Content Include="Common\Admin\libs\jquery\AUTHORS.txt" />
     <Content Include="Common\Admin\libs\jquery\dist\core.js" />
@@ -480,6 +514,18 @@
     <Content Include="Common\Admin\libs\jquery\src\var\support.js" />
     <Content Include="Common\Admin\libs\jquery\src\var\toString.js" />
     <Content Include="Common\Admin\libs\jquery\src\wrap.js" />
+    <Content Include="Common\Admin\libs\ngBootbox\dist\ngBootbox.js" />
+    <Content Include="Common\Admin\libs\ngBootbox\dist\ngBootbox.min.js" />
+    <Content Include="Common\Admin\libs\ngBootbox\examples\example-1\app.js" />
+    <Content Include="Common\Admin\libs\ngBootbox\examples\example-1\custom-dialog.tpl.html" />
+    <Content Include="Common\Admin\libs\ngBootbox\examples\example-1\index.html" />
+    <Content Include="Common\Admin\libs\ngBootbox\examples\example-2\app.js" />
+    <Content Include="Common\Admin\libs\ngBootbox\examples\example-2\index.html" />
+    <Content Include="Common\Admin\libs\ngBootbox\examples\example-2\main.js" />
+    <Content Include="Common\Admin\libs\ngBootbox\examples\example-2\require.js" />
+    <Content Include="Common\Admin\libs\ngBootbox\examples\index.html" />
+    <Content Include="Common\Admin\libs\ngBootbox\gulpfile.js" />
+    <Content Include="Common\Admin\libs\ngBootbox\ngBootbox.js" />
     <Content Include="Common\Admin\libs\slimScroll\examples\allow-page-scroll.html" />
     <Content Include="Common\Admin\libs\slimScroll\examples\chaining.html" />
     <Content Include="Common\Admin\libs\slimScroll\examples\disable-fade-out.html" />
@@ -688,6 +734,123 @@
     <Content Include="Common\Admin\libs\toastr\toastr.js.map" />
     <Content Include="Common\Admin\libs\toastr\toastr.less" />
     <Content Include="Common\Admin\libs\toastr\toastr.scss" />
+    <Content Include="Common\Admin\libs\bootbox\.bower.json" />
+    <Content Include="Common\Admin\libs\bootbox\.jshintrc" />
+    <Content Include="Common\Admin\libs\bootbox\.npmignore" />
+    <Content Include="Common\Admin\libs\bootbox\.travis.yml" />
+    <Content Include="Common\Admin\libs\bootbox\bower.json" />
+    <Content Include="Common\Admin\libs\bootbox\CONTRIBUTING.md" />
+    <Content Include="Common\Admin\libs\bootbox\LICENSE.md" />
+    <Content Include="Common\Admin\libs\bootbox\package.json" />
+    <Content Include="Common\Admin\libs\bootbox\README.md" />
+    <Content Include="Common\Admin\libs\bootstrap\.bower.json" />
+    <Content Include="Common\Admin\libs\bootstrap\bower.json" />
+    <Content Include="Common\Admin\libs\bootstrap\CHANGELOG.md" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Common\Admin\libs\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Common\Admin\libs\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Common\Admin\libs\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Common\Admin\libs\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Common\Admin\libs\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Common\Admin\libs\bootstrap\Gemfile" />
+    <Content Include="Common\Admin\libs\bootstrap\Gemfile.lock" />
+    <Content Include="Common\Admin\libs\bootstrap\grunt\.jshintrc" />
+    <Content Include="Common\Admin\libs\bootstrap\grunt\configBridge.json" />
+    <Content Include="Common\Admin\libs\bootstrap\grunt\npm-shrinkwrap.json" />
+    <Content Include="Common\Admin\libs\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="Common\Admin\libs\bootstrap\ISSUE_TEMPLATE.md" />
+    <Content Include="Common\Admin\libs\bootstrap\js\.jscsrc" />
+    <Content Include="Common\Admin\libs\bootstrap\js\.jshintrc" />
+    <Content Include="Common\Admin\libs\bootstrap\less\.csscomb.json" />
+    <Content Include="Common\Admin\libs\bootstrap\less\.csslintrc" />
+    <Content Include="Common\Admin\libs\bootstrap\less\alerts.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\badges.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\bootstrap.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\breadcrumbs.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\button-groups.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\buttons.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\carousel.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\close.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\code.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\component-animations.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\dropdowns.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\forms.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\glyphicons.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\grid.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\input-groups.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\jumbotron.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\labels.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\list-group.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\media.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\alerts.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\buttons.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\center-block.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\forms.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\gradients.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\grid.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\image.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\labels.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\list-group.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\opacity.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\pagination.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\panels.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\resize.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\size.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\table-row.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\modals.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\navbar.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\navs.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\normalize.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\pager.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\pagination.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\panels.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\popovers.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\print.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\progress-bars.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\responsive-embed.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\responsive-utilities.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\scaffolding.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\tables.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\theme.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\thumbnails.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\tooltip.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\type.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\utilities.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\variables.less" />
+    <Content Include="Common\Admin\libs\bootstrap\less\wells.less" />
+    <Content Include="Common\Admin\libs\bootstrap\LICENSE" />
+    <Content Include="Common\Admin\libs\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="Common\Admin\libs\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="Common\Admin\libs\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="Common\Admin\libs\bootstrap\package.json" />
+    <Content Include="Common\Admin\libs\bootstrap\README.md" />
+    <Content Include="Common\Admin\libs\ngBootbox\.bower.json" />
+    <Content Include="Common\Admin\libs\ngBootbox\bower.json" />
+    <Content Include="Common\Admin\libs\ngBootbox\package.json" />
+    <Content Include="Common\Admin\libs\ngBootbox\README.md" />
+    <Content Include="Common\Admin\libs\ngBootbox\tsd.json" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
@@ -712,11 +875,20 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Common\Admin\libs\ngBootbox\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Common\Admin\libs\ngBootbox\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Common\Admin\libs\ngBootbox\typings\tsd.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

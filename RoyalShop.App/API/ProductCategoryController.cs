@@ -82,7 +82,7 @@ namespace RoyalShop.App.API
             });
         }
 
-        [Route("Create")]
+        [Route("create")]
         [HttpPost]
         [AllowAnonymous] //cho phép post nặc danh ko cần đăng nhập
         public HttpResponseMessage Create(HttpRequestMessage request, ProductCategoryViewModel productCategoryVM)
@@ -129,6 +129,30 @@ namespace RoyalShop.App.API
                     _productCategoryService.Update(dbPorductCategory);
                     _productCategoryService.Save();
                     var responseDate = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbPorductCategory);
+                    response = request.CreateResponse(HttpStatusCode.Created, responseDate);
+                }
+
+                return response;
+            });
+        }
+
+        [Route("delete")]
+        [HttpDelete]
+        [AllowAnonymous] //cho phép post nặc danh ko cần đăng nhập
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);//error 400
+                }
+                else
+                {
+                    var oldProductCategory = _productCategoryService.Delete(id);
+                    _productCategoryService.Save();
+                    var responseDate = Mapper.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
                     response = request.CreateResponse(HttpStatusCode.Created, responseDate);
                 }
 

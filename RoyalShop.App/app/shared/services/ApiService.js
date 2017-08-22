@@ -8,7 +8,22 @@
         return {
             get: get,
             post: post,
-            put: put
+            put: put,
+            del: del
+        }
+
+        function del(url, data, success, failure) {
+            $http.delete(url, data).then(function (resuilt) {
+                success(resuilt);
+            }, function (error) {
+                if (error.status === 401) {
+                    notificationService.displayError("Authenticate is require!");
+                }
+                else if (failure != null) {
+                    failure(error);
+                }
+
+            });
         }
 
         function post(url,data,success,failure) {
