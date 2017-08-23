@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace RoyalShop.App.API
 {
@@ -129,7 +130,7 @@ namespace RoyalShop.App.API
                     _productCategoryService.Update(dbPorductCategory);
                     _productCategoryService.Save();
                     var responseDate = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbPorductCategory);
-                    response = request.CreateResponse(HttpStatusCode.Created, responseDate);
+                    response = request.CreateResponse(HttpStatusCode.OK, responseDate);
                 }
 
                 return response;
@@ -154,6 +155,35 @@ namespace RoyalShop.App.API
                     _productCategoryService.Save();
                     var responseDate = Mapper.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
                     response = request.CreateResponse(HttpStatusCode.Created, responseDate);
+                }
+
+                return response;
+            });
+        }
+
+        [Route("deletemulti")]
+        [HttpDelete]
+        [AllowAnonymous] //cho phép post nặc danh ko cần đăng nhập
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProductCategories)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);//error 400
+                }
+                else
+                {
+                    var listProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(checkedProductCategories);
+                    foreach(var item in listProductCategory)
+                    {
+                        _productCategoryService.Delete(item);
+                    }
+                    
+                    _productCategoryService.Save();
+                    
+                    response = request.CreateResponse(HttpStatusCode.OK, listProductCategory.Count);
                 }
 
                 return response;
