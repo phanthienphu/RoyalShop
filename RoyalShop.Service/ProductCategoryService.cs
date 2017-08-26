@@ -11,9 +11,9 @@ namespace RoyalShop.Service
 {
     public interface IProductCategoryService
     {
-        ProductCategory Add(ProductCategory postCategory);
+        ProductCategory Add(ProductCategory productCategory);
 
-        void Update(ProductCategory postCategory);
+        void Update(ProductCategory productCategory);
 
         ProductCategory Delete(int id);
 
@@ -32,15 +32,15 @@ namespace RoyalShop.Service
         private IProductCategoryRepository _ProductCategoryRepository;
         private IUnitOfWork _unitOfWork;
 
-        public ProductCategoryService(IProductCategoryRepository postCategoryRepository, IUnitOfWork unitOfWork)
+        public ProductCategoryService(IProductCategoryRepository productCategoryRepository, IUnitOfWork unitOfWork)
         {
-            this._ProductCategoryRepository = postCategoryRepository;
+            this._ProductCategoryRepository = productCategoryRepository;
             this._unitOfWork = unitOfWork;
         }
 
-        public ProductCategory Add(ProductCategory postCategory)
+        public ProductCategory Add(ProductCategory productCategory)
         {
-            return _ProductCategoryRepository.Add(postCategory);
+            return _ProductCategoryRepository.Add(productCategory);
         }
 
         public ProductCategory Delete(int id)
@@ -76,9 +76,9 @@ namespace RoyalShop.Service
             _unitOfWork.Commit();
         }
 
-        public void Update(ProductCategory postCategory)
+        public void Update(ProductCategory productCategory)
         {
-            _ProductCategoryRepository.Update(postCategory);
+            _ProductCategoryRepository.Update(productCategory);
         }
     }
 }

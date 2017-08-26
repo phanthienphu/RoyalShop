@@ -61,5 +61,56 @@ namespace RoyalShop.App.Infrastructure.Extensions
             productCategory.MetaDescription = productCategoryVM.MetaDescription;
             productCategory.Status = productCategoryVM.Status;
         }
+
+        public static void UpdatePost(this Post post, PostViewModel postVm)
+        {
+            post.ID = postVm.ID;
+            post.Name = postVm.Name;
+            post.Description = postVm.Description;
+            post.Alias = postVm.Alias;
+            post.CategoryID = postVm.CategoryID;
+            post.Content = postVm.Content;
+            post.Image = postVm.Image;
+            post.HomeFlag = postVm.HomeFlag;
+            post.ViewCount = postVm.ViewCount;
+
+            post.CreatedDate = postVm.CreatedDate;
+            post.CreatedBy = postVm.CreatedBy;
+            post.UpdatedDate = postVm.UpdatedDate;
+            post.UpdatedBy = postVm.UpdatedBy;
+            post.MetaKeyword = postVm.MetaKeyword;
+            post.MetaDescription = postVm.MetaDescription;
+            post.Status = postVm.Status;
+        }
+
+        public static void UpdateProduct(this Product product, ProductViewModel productVm)
+        {
+            product.ID = productVm.ID;
+            product.Name = productVm.Name;
+            product.Description = productVm.Description;
+            product.Alias = productVm.Alias;
+            product.CategoryID = productVm.CategoryID;
+            product.Content = productVm.Content;
+            product.Image = productVm.Image;
+            product.MoreImages = productVm.MoreImages;
+            product.Price = productVm.Price;
+            product.PromotionPrice = productVm.PromotionPrice;
+            product.Warranty = productVm.Warranty;
+            product.HomeFlag = productVm.HomeFlag;
+            product.HotFlag = productVm.HotFlag;
+            product.ViewCount = productVm.ViewCount;
+
+            product.CreatedDate = productVm.CreatedDate;
+            product.CreatedBy = productVm.CreatedBy;
+            product.UpdatedDate = productVm.UpdatedDate;
+            product.UpdatedBy = productVm.UpdatedBy;
+            product.MetaKeyword = productVm.MetaKeyword;
+            product.MetaDescription = productVm.MetaDescription;
+            product.Status = productVm.Status;
+            product.Tags = productVm.Tags;
+            product.Quantity = productVm.Quantity;
+            product.OriginalPrice = productVm.OriginalPrice;
+        }
+
     }
 }
