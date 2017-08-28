@@ -3,9 +3,9 @@
 (function (app) {
     app.controller("ProductEditController", ProductEditController);
 
-    ProductEditController.$inject = ["$scope", "apiService", "notificationService", "$state", "commonService"];
+    ProductEditController.$inject = ["$scope", "apiService", "notificationService", "$state","$stateParams","commonService"];
 
-    function ProductEditController($scope, apiService, notificationService, $state, commonService) {
+    function ProductEditController($scope, apiService, notificationService, $state,$stateParams, commonService) {
         $scope.product = {};
 
         $scope.ckeditorOptions = {
@@ -21,8 +21,16 @@
             $scope.product.Alias = commonService.getSeoTitle($scope.product.Name);
         }
 
+        function LoadProductDetail() {
+            apiService.get("/api/product/getbyid/" + $stateParams.id, null, function (resuilt) {
+                $scope.product = resuilt.data;
+            }, function (error) {
+                notificationService.displayError(error.data);
+            });
+        }
+
         function UpdateProduct() {
-            apiService.post("/api/product/update", $scope.product, function (resuilt) {
+            apiService.put("/api/product/update", $scope.product, function (resuilt) {
                 notificationService.displaySuccess(resuilt.data.Name + " đã được cập nhật!");
                 $state.go("products");
             }, function (error) {
@@ -47,5 +55,6 @@
         }
 
         loadProductCategory();
+        LoadProductDetail();
     }
 })(angular.module("royalshop.products"));

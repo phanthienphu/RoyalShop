@@ -2,7 +2,7 @@
 
 namespace RoyalShop.App.Models
 {
-    [Serializable]
+   
     public class ProductViewModel
     {
         public int ID { set; get; }

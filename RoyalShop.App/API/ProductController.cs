@@ -14,6 +14,7 @@ using System.Web.Script.Serialization;
 
 namespace RoyalShop.App.API
 {
+    
     [RoutePrefix("api/product")]
     public class ProductController : ApiControllerBase
     {
