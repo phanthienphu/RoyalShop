@@ -1,4 +1,5 @@
-﻿using RoyalShop.Data.Infrastructure;
+﻿using RoyalShop.Common;
+using RoyalShop.Data.Infrastructure;
 using RoyalShop.Data.Repositories;
 using RoyalShop.Model.Models;
 using System;
@@ -28,17 +29,44 @@ namespace RoyalShop.Service
     public class ProductService : IProductService
     {
         private IProductRepository _productRepository;
+        private ITagRepository _tagRepository;
+        private IProductTagRepository _productTagRepository;
         private IUnitOfWork _unitOfWork;
 
-        public ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork)
+        public ProductService(IProductRepository productRepository,IProductTagRepository productTagRepository,ITagRepository tagRepository, IUnitOfWork unitOfWork)
         {
             this._productRepository = productRepository;
+            this._productTagRepository = productTagRepository;
+            this._tagRepository = tagRepository;
             this._unitOfWork = unitOfWork;
         }
 
         public Product Add(Product product)
         {
-            return _productRepository.Add(product);
+            var Product = _productRepository.Add(product);
+            _unitOfWork.Commit();
+            if (!string.IsNullOrEmpty(product.Tags))
+            {
+                string[] tags = product.Tags.Split(',');
+                for(var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]);
+                    if(_tagRepository.Count(x => x.ID == tagId)== 0)
+                    {
+                        Tag tag = new Tag();
+                        tag.ID = tagId;
+                        tag.Name = tags[i];
+                        tag.Type = CommonConstants.ProductTag;
+                        _tagRepository.Add(tag);
+                    }
+
+                    ProductTag productTag = new ProductTag();
+                    productTag.ProductID = product.ID;
+                    productTag.TagID = tagId;
+                    _productTagRepository.Add(productTag);
+                }
+            }
+            return Product;
         }
 
         public Product Delete(int id)
@@ -72,6 +100,27 @@ namespace RoyalShop.Service
         public void Update(Product product)
         {
             _productRepository.Update(product);
+            if (!string.IsNullOrEmpty(product.Tags))
+            {
+                string[] tags = product.Tags.Split(',');
+                for (var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]);
+                    if (_tagRepository.Count(x => x.ID == tagId) == 0)
+                    {
+                        Tag tag = new Tag();
+                        tag.ID = tagId;
+                        tag.Name = tags[i];
+                        tag.Type = CommonConstants.ProductTag;
+                        _tagRepository.Add(tag);
+                    }
+                    _productTagRepository.DeleteMulti(x => x.ProductID == product.ID);
+                    ProductTag productTag = new ProductTag();
+                    productTag.ProductID = product.ID;
+                    productTag.TagID = tagId;
+                    _productTagRepository.Add(productTag);
+                }
+            }
         }
     }
 }

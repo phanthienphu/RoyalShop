@@ -9,11 +9,14 @@
             url: "/products",
             templateUrl: "/app/components/products/ProductListView.html",
             controller: "ProductListController"
-        });
-        $stateProvider.state("product_add", {
+        }).state("product_add", {
             url: "/product_add",
             templateUrl: "/app/components/products/ProductAddView.html",
             controller: "ProductAddController"
-        });
+            }).state("product_edit", {
+            url: "/product_edit",
+            templateUrl: "/app/components/products/ProductEditView.html",
+            controller: "ProductEditController"
+        });;
     }
 })();
