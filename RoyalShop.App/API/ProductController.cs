@@ -16,6 +16,7 @@ namespace RoyalShop.App.API
 {
     
     [RoutePrefix("api/product")]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         #region Initialize
@@ -100,6 +101,7 @@ namespace RoyalShop.App.API
                     var newPorduct = new Product();
                     newPorduct.UpdateProduct(productVM);
                     newPorduct.CreatedDate = DateTime.Now;
+                    newPorduct.CreatedBy = User.Identity.Name;
                     _productService.Add(newPorduct);
                     _productService.Save();
                     var responseDate = Mapper.Map<Product, ProductViewModel>(newPorduct);
@@ -127,6 +129,7 @@ namespace RoyalShop.App.API
                     var dbPorduct = _productService.GetById(productVM.ID);
                     dbPorduct.UpdateProduct(productVM);
                     dbPorduct.UpdatedDate = DateTime.Now;
+                    dbPorduct.UpdatedBy = User.Identity.Name;
                     _productService.Update(dbPorduct);
                     _productService.Save();
                     var responseDate = Mapper.Map<Product, ProductViewModel>(dbPorduct);

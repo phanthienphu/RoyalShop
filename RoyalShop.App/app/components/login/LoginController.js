@@ -1,12 +1,22 @@
-﻿/// <reference path="/Common/Admin/libs/angular/angular.js" />
-(function (app) {
-    app.controller("loginController", loginController);
+﻿(function (app) {
+    app.controller('LoginController', ['$scope', 'loginService', '$injector', 'notificationService',
+        function ($scope, loginService, $injector, notificationService) {
 
-    loginController.$inject = ["$scope","$state"];
+            $scope.loginData = {
+                userName: "",
+                password: ""
+            };
 
-    function loginController($scope,$state) {
-        $scope.loginSubmit = function () {
-            $state.go("home");
-        }
-    }
-})(angular.module("royalshop"));
+            $scope.loginSubmit = function () {
+                loginService.login($scope.loginData.userName, $scope.loginData.password).then(function (response) {
+                    if (response != null && response.data.error != undefined) {
+                        notificationService.displayError("Đăng nhập không đúng.");
+                    }
+                    else {
+                        var stateService = $injector.get('$state'); //inject tự động tránh lỗi liên kết vòng (http:\\abc/http:\\)
+                        stateService.go('home');
+                    }
+                });
+            }
+        }]);
+})(angular.module('royalshop'));
