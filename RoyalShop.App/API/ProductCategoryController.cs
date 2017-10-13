@@ -16,7 +16,7 @@ namespace RoyalShop.App.API
 {
     
     [RoutePrefix("api/productcategory")]
-    [Authorize]
+    //[Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         #region Initialize

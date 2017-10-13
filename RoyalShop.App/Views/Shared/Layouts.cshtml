@@ -3,6 +3,7 @@
 <head>
     <title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
     <link href="/Common//Client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Common/Client/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
     <!--theme-style-->
     <link href="/Common//Client/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!--//theme-style-->
@@ -20,18 +21,10 @@
     <!---->
     <div class="container">
         @RenderBody()
+        @{ Html.RenderAction("Category", "Home");}
     </div>
-    @RenderSection("HomeProducts", required:false)
-   
-    <div class="clearfix"> </div>
-    </div>
-    @{ Html.RenderAction("Category","Home");}
-    <div class="clearfix"> </div>
-    </div>
-
-    <!---->
     @{Html.RenderAction("Footer", "Home");}
-
+    <div class="clearfix"> </div>
     @RenderSection("FooterJS", required:false)
 </body>
 </html>

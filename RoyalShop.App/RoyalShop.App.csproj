@@ -4255,6 +4255,10 @@
     <Content Include="Common\Client\css\etalage.css" />
     <Content Include="Common\Client\css\form.css" />
     <Content Include="Common\Client\css\style.css" />
+    <Content Include="Common\Client\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Common\Client\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Common\Client\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Common\Client\font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Common\Client\images\a-star.png" />
     <Content Include="Common\Client\images\arrow1.png" />
     <Content Include="Common\Client\images\arrow2.png" />
@@ -4342,7 +4346,6 @@
     <Folder Include="Views\About\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Content\" />
-    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -4687,6 +4690,39 @@
     <Content Include="ConnectionStrings.config" />
     <Content Include="AppSettings.config" />
     <Content Include="Common\Client\images\Thumbs.db" />
+    <Content Include="Common\Client\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Common\Client\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Common\Client\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Common\Client\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Common\Client\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Common\Client\font-awesome-4.7.0\scss\_variables.scss" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\Layouts.cshtml" />
@@ -4694,6 +4730,7 @@
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Category.cshtml" />
+    <Content Include="Views\Product\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RoyalShop.Common\RoyalShop.Common.csproj">
