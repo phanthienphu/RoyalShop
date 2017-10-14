@@ -28,11 +28,11 @@ namespace RoyalShop.App.Controllers
             return View();
         }
 
-        public ActionResult Category(int id,int page = 1)
+        public ActionResult Category(int id,int page = 1,string sort = "")
         {
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
             int totalRaw = 0;
-            var productModel = _productService.GetListProductByCategoryIdPaging(id, page, pageSize, out totalRaw);
+            var productModel = _productService.GetListProductByCategoryIdPaging(id, page, pageSize,sort, out totalRaw);
 
             var productViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(productModel);
 
@@ -49,6 +49,37 @@ namespace RoyalShop.App.Controllers
                 TotalPages = totalPage
             };
             return View(paginationSet);
+        }
+
+        public ActionResult Search(string keyword, int page = 1, string sort = "")
+        {
+            int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
+            int totalRaw = 0;
+            var productModel = _productService.Search(keyword, page, pageSize, sort, out totalRaw);
+
+            var productViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(productModel);
+
+            int totalPage = (int)Math.Ceiling((double)totalRaw / pageSize);
+
+            ViewBag.keyword = keyword;
+            var paginationSet = new PaginationSet<ProductViewModel>()
+            {
+                Items = productViewModel,
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage")),
+                Page = page,
+                TotalCount = totalRaw,
+                TotalPages = totalPage
+            };
+            return View(paginationSet);
+        }
+
+        public JsonResult GetListProductByName(string keyword)
+        {
+            var model = _productService.GetListProductByName(keyword);
+            return Json(new
+            {
+                data = model
+            },JsonRequestBehavior.AllowGet);
         }
     }
 }

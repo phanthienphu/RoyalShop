@@ -4,6 +4,7 @@
     <title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
     <link href="/Common//Client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/Common/Client/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="/Common/Admin/libs/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />
     <!--theme-style-->
     <link href="/Common//Client/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!--//theme-style-->
@@ -12,8 +13,6 @@
     <!--fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <!--//fonts-->
-    <script src="/Common//Client/js/jquery.min.js"></script>
-    <!--script-->
 </head>
 <body>
     <!--header-->
@@ -25,6 +24,11 @@
     </div>
     @{Html.RenderAction("Footer", "Home");}
     <div class="clearfix"> </div>
+
+    <script src="/Common//Client/js/jquery.min.js"></script>
+    <script src="/Common/Admin/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/Common/Client/js/Common.js"></script>
+    <!--script-->
     @RenderSection("FooterJS", required:false)
 </body>
 </html>
