@@ -35,6 +35,14 @@ namespace RoyalShop.Service
 
         Product GetById(int id);
 
+        IEnumerable<Tag> GetListTagByProductId(int id);
+
+        void IncreaseView(int id);
+
+        IEnumerable<Product> GetListProductByTag(string tagId, int page, int pageSize, out int totalRow);
+
+        Tag GetTag(string tagId);
+
         void Save();
     }
 
@@ -204,6 +212,37 @@ namespace RoyalShop.Service
         {
             var product = _productRepository.GetSingleById(id);
             return _productRepository.GetMulti(x => x.Status && x.ID != id && x.CategoryID == product.CategoryID).OrderByDescending(x => x.CreatedDate).Take(top);
+        }
+
+        public IEnumerable<Tag> GetListTagByProductId(int id)
+        {
+            return _productTagRepository.GetMulti(x => x.ProductID == id, new string[] { "Tag" }).Select(y => y.Tag); //lấy ra  thực thể Tag theo mỗi Product vì bảng product join với bảng tag
+        }
+
+        public void IncreaseView(int id)
+        {
+            var product = _productRepository.GetSingleById(id);
+            if (product.ViewCount.HasValue)
+                product.ViewCount += 1;
+            else
+                product.ViewCount = 1;
+        }
+
+        public IEnumerable<Product> GetListProductByTag(string tagId,int page,int pageSize,out int totalRow)
+        {
+            //var model = _productRepository.GetMulti(x => x.Status && x.ProductTags.Count(y => y.ProductID == x.ID) > 0
+            //, new string[] { "ProductCategory", "ProductTag" });
+
+            //totalRow = model.Count();
+            
+            var model = _productRepository.GetListProductByTag(tagId, page, pageSize, out totalRow);
+
+            return model;
+        }
+
+        public Tag GetTag(string tagId)
+        {
+            return _tagRepository.GetSingleByCondition(x => x.ID==tagId);
         }
     }
 }

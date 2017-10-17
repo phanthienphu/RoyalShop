@@ -4882,6 +4882,7 @@
     <Content Include="Common\Admin\libs\toastr\toastr.min.css" />
     <Content Include="Common\Admin\libs\toastr\toastr.min.js" />
     <Content Include="Common\Client\css\bootstrap.css" />
+    <Content Include="Common\Client\css\custom.css" />
     <Content Include="Common\Client\css\etalage.css" />
     <Content Include="Common\Client\css\form.css" />
     <Content Include="Common\Client\css\style.css" />
@@ -5371,6 +5372,7 @@
     <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Product\Search.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Product\ListByTag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RoyalShop.Common\RoyalShop.Common.csproj">

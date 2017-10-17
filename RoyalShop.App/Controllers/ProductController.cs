@@ -33,6 +33,8 @@ namespace RoyalShop.App.Controllers
             List<string> listImages = new JavaScriptSerializer().Deserialize<List<string>>(viewModel.MoreImages);
             ViewBag.MoreImages = listImages;
 
+            ViewBag.Tags =Mapper.Map<IEnumerable<Tag>,IEnumerable<TagViewModel>>(_productService.GetListTagByProductId(productId));
+
             return View(viewModel);
         }
 
@@ -70,6 +72,28 @@ namespace RoyalShop.App.Controllers
             int totalPage = (int)Math.Ceiling((double)totalRaw / pageSize);
 
             ViewBag.keyword = keyword;
+            var paginationSet = new PaginationSet<ProductViewModel>()
+            {
+                Items = productViewModel,
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage")),
+                Page = page,
+                TotalCount = totalRaw,
+                TotalPages = totalPage
+            };
+            return View(paginationSet);
+        }
+
+        public ActionResult ListByTag(string tagId, int page = 1)
+        {
+            int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
+            int totalRaw = 0;
+            var productModel = _productService.GetListProductByTag(tagId, page, pageSize, out totalRaw);
+
+            var productViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(productModel);
+
+            int totalPage = (int)Math.Ceiling((double)totalRaw / pageSize);
+
+            ViewBag.keyword = Mapper.Map<Tag,TagViewModel>(_productService.GetTag(tagId));
             var paginationSet = new PaginationSet<ProductViewModel>()
             {
                 Items = productViewModel,
