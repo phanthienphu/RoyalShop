@@ -26,6 +26,7 @@ namespace RoyalShop.App.Mappings
                 cfg.CreateMap<ProductTag, ProductTagViewModel>();
                 cfg.CreateMap<Footer, FooterViewModel>();
                 cfg.CreateMap<Slide, SlideViewModel>();
+                cfg.CreateMap<Page, PageViewModel>();
             });
         }
     }
