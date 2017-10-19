@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace RoyalShop.App.Controllers
 {
@@ -23,6 +24,7 @@ namespace RoyalShop.App.Controllers
             _commonService = commonService;
         }
 
+        [OutputCache(Duration = 60, Location = OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             var slideModel = _commonService.GetSlides();
@@ -39,22 +41,10 @@ namespace RoyalShop.App.Controllers
             homeViewModel.TopSaleProducts = topSaleProductViewModel;
             return View(homeViewModel);
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
+        
         [ChildActionOnly] //chỉ được nhúng, không thể gọi trực tiếp như home/footer
+        //[OutputCache(Duration = 3600,Location =OutputCacheLocation.Server)]
+        [OutputCache(Duration = 3600)]
         public ActionResult Footer()
         {
             var model = _commonService.GetFooter();
@@ -69,6 +59,8 @@ namespace RoyalShop.App.Controllers
         }
 
         [ChildActionOnly]
+        //[OutputCache(Duration = 3600, Location = OutputCacheLocation.Server)]
+        [OutputCache(Duration = 3600)]
         public ActionResult Category()
         {
             var model = _productCategoryService.GetAll();
