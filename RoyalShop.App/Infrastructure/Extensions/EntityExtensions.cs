@@ -112,5 +112,13 @@ namespace RoyalShop.App.Infrastructure.Extensions
             product.OriginalPrice = productVm.OriginalPrice;
         }
 
+        public static void UpdateFeedback(this Feedback feedback, FeedbackViewModel feedbackVM)
+        {
+            feedback.Name = feedbackVM.Name;
+            feedback.Message = feedbackVM.Message;
+            feedback.Email = feedbackVM.Email;
+            feedback.CreatedDate = DateTime.Now;
+            feedback.Status = feedbackVM.Status;
+        }
     }
 }

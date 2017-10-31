@@ -12,6 +12,8 @@ namespace RoyalShop.App
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            // BotDetect requests must not be routed
+            routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
 
             routes.MapRoute(
                name: "Login",
@@ -24,6 +26,13 @@ namespace RoyalShop.App
               name: "Search",
               url: "tim-kiem.html",
               defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
+              namespaces: new string[] { "RoyalShop.App.Controllers" }
+          );
+
+            routes.MapRoute(
+              name: "Contact",
+              url: "lien-he.html",
+              defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional },
               namespaces: new string[] { "RoyalShop.App.Controllers" }
           );
 

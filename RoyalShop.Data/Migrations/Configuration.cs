@@ -23,6 +23,7 @@
             CreateSlide(context);
             //  This method will be called after migrating to the latest version.
             CreatePage(context);
+            CreateContactDetail(context);
 
             //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new RoyalShopDbContext()));
         }
@@ -116,7 +117,7 @@
 
         private void CreatePage(RoyalShopDbContext context)
         {
-            if(context.Pages.Count() == 0)
+            if (context.Pages.Count() == 0)
             {
                 var page = new Page()
                 {
@@ -133,6 +134,28 @@
                 };
 
                 context.Pages.Add(page);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateContactDetail(RoyalShopDbContext context)
+        {
+            if (context.ContactDetails.Count() == 0)
+            {
+                var contactDetal = new ContactDetail()
+                {
+                    Name = "Shop hoàng gia PTP",
+                    Address = "463B/44 Bis CMT8, phường 11, quận 10, TPHCM",
+                    Email = "royal@gmail.com",
+                    Lat = 10.7806136,
+                    Ing = 106.6742883,
+                    Phone = "0902589072",
+                    Website = "http://royal.com.vn",
+                    Other = "",
+                    Status = true
+                };
+
+                context.ContactDetails.Add(contactDetal);
                 context.SaveChanges();
             }
         }
