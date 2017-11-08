@@ -23,6 +23,13 @@ namespace RoyalShop.App
            );
 
             routes.MapRoute(
+               name: "Register",
+               url: "dang-ky.html",
+               defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
+               namespaces: new string[] { "RoyalShop.App.Controllers" }
+           );
+
+            routes.MapRoute(
               name: "Search",
               url: "tim-kiem.html",
               defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },

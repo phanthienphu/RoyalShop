@@ -30,7 +30,12 @@
         return $("<li>")
           .append("<div>" + item.label + "</div>")
           .appendTo(ul);
-         };
+    };
+
+        //$('#btnLogout').off('click').on('click', function (e) {
+        //    e.preventDefault();
+        //    $('#frmLogout').submit();
+        //});
     }
 }
 common.init();
