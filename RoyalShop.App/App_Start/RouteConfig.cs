@@ -30,9 +30,16 @@ namespace RoyalShop.App
            );
 
             routes.MapRoute(
+               name: "Cart",
+               url: "gio-hang.html",
+               defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+               namespaces: new string[] { "RoyalShop.App.Controllers" }
+           );
+
+            routes.MapRoute(
               name: "Search",
               url: "tim-kiem.html",
-              defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
+              defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
               namespaces: new string[] { "RoyalShop.App.Controllers" }
           );
 
