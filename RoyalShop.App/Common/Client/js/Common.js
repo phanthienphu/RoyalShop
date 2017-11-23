@@ -32,10 +32,28 @@
           .appendTo(ul);
     };
 
-        //$('#btnLogout').off('click').on('click', function (e) {
-        //    e.preventDefault();
-        //    $('#frmLogout').submit();
-        //});
+        $('.btnAddToCart').off('click').on('click', function (e) {
+            e.preventDefault();//xoá sấu thăng trong href
+            var productId = parseInt($(this).data('id'));//this đại diện cho nút btnAddToCart
+            $.ajax({
+                url: '/ShoppingCart/Add',
+                data: {
+                    productId: productId
+                },
+                type: 'POST',
+                dataType: 'Json',
+                success: function (response) {
+                    if (response.status) {
+                        alert("Thêm sản phẩm thành công!")
+                    }
+                }
+            });
+        })
+
+        $('#btnLogout').off('click').on('click', function (e) {
+            e.preventDefault();
+            $('#frmLogout').submit();
+        });
     }
 }
 common.init();

@@ -1,5 +1,6 @@
 ﻿using RoyalShop.App.Models;
 using RoyalShop.Model.Models;
+using RoyalShopp.App.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -119,6 +120,21 @@ namespace RoyalShop.App.Infrastructure.Extensions
             feedback.Email = feedbackVM.Email;
             feedback.CreatedDate = DateTime.Now;
             feedback.Status = feedbackVM.Status;
+        }
+
+        public static void UpdateOrder(this Order order, OrderViewModel orderVM)
+        {
+            order.CustomerName = orderVM.CustomerName;
+            order.CustomerAddress = orderVM.CustomerAddress;
+            order.CustomerEmail = orderVM.CustomerEmail;
+            order.CustomerMobile = orderVM.CustomerMobile;
+            order.CustomerMessage = orderVM.CustomerMessage;
+            order.PaymentMethod = orderVM.PaymentMethod;
+            order.CreatedDate = DateTime.Now;
+            order.CreatedBy = orderVM.CreatedBy;
+            order.Status = orderVM.Status;
+            order.CustomerId = orderVM.CustomerId;
+            //order.OrderDetails = AutoMapper.Mapper.Map<IEnumerable<OrderDetailViewModel>, IEnumerable<OrderDetail>>(orderVM.OrderDetails);
         }
     }
 }
