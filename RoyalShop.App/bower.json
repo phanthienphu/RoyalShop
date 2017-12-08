@@ -18,7 +18,8 @@
     "jquery-ui": "~1.12.1",
     "mustache": "~2.3.0",
     "numeral": "~2.0.6",
-    "jquery-validation": "~1.17.0"
+    "jquery-validation": "~1.17.0",
+    "checklist-model": "~0.11.0"
   },
   "resolutions": {
     "angular": "~1.6.6"

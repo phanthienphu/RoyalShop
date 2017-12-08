@@ -1,4 +1,4 @@
-﻿namespace RoyalShopp.App.Models
+﻿namespace RoyalShop.App.Models
 {
     public class OrderDetailViewModel
     {

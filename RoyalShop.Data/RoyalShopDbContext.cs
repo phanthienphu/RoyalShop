@@ -34,10 +34,10 @@ namespace RoyalShop.Data
         public DbSet<ContactDetail> ContactDetails { set; get; }
         public DbSet<Feedback> Feedbacks { set; get; }
 
-        //public DbSet<ApplicationGroup> ApplicationGroups { set; get; }
-        //public DbSet<ApplicationRole> ApplicationRoles { set; get; }
-        //public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { set; get; }
-        //public DbSet<ApplicationUserGroup> ApplicationUserGroups { set; get; }
+        public DbSet<ApplicationGroup> ApplicationGroups { set; get; }
+        public DbSet<ApplicationRole> ApplicationRoles { set; get; }
+        public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { set; get; }
+        public DbSet<ApplicationUserGroup> ApplicationUserGroups { set; get; }
 
         public static RoyalShopDbContext Create()
         {
@@ -47,8 +47,13 @@ namespace RoyalShop.Data
         protected override void OnModelCreating(DbModelBuilder builder) // ghi đè phương thức OnModelCreating trong DbContext
         {
             //đặt khoá chính
-            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
-            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
+            //builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
+            //builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
+
+            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");//đổi tên bảng thành ApplicationUserRoles
+            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("ApplicationUserLogins");
+            builder.Entity<IdentityRole>().ToTable("ApplicationRoles");
+            builder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("ApplicationUserClaims");
 
             //đặt khoá chính
             //builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("ApplicationUserRoles");

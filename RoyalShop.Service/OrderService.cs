@@ -19,12 +19,13 @@ namespace RoyalShop.Service
         IOrderDetailRepository _orderDetailRepository;
         IUnitOfWork _unitOfWork;
 
-        public OrderService(OrderRepository orderRepository,OrderDetailRepository orderDetailRepository,UnitOfWork unitOfWork)
+        public OrderService(IOrderRepository orderRepository,IOrderDetailRepository orderDetailRepository,IUnitOfWork unitOfWork)
         {
             this._orderRepository = orderRepository;
             this._orderDetailRepository =orderDetailRepository;
             this._unitOfWork = unitOfWork;
         }
+
         public bool Create(Order order, List<OrderDetail> orderDetails)
         {
             try
@@ -40,11 +41,10 @@ namespace RoyalShop.Service
                 _unitOfWork.Commit();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
-           
         }
     }
 }

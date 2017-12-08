@@ -1,45 +1,45 @@
 ﻿/// <reference path="\Common/Admin/libs/angular/angular.js" />
-(function(){
+(function () {
     angular.module("royalshop",
         ["royalshop.products",
           "royalshop.product_categories",
+          'royalshop.application_roles',
+         'royalshop.application_users',
           "royalshop.common"])
           .config(config)
            .config(configAuthentication);
 
     config.$inject = ["$stateProvider", "$urlRouterProvider"];
 
-    function config($stateProvider,$urlRouterProvider) {
+    function config($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state("base",{
-                url:"",
+            .state("base", {
+                url: "",
                 templateUrl: "/app/shared/views/BaseView.html",
                 abstract: true
             })
             .state("login", {
                 url: "/login",
                 templateUrl: "/app/components/login/LoginView.html",
-                controller:"LoginController"
+                controller: "LoginController"
             })
             .state("home", {
                 url: "/admin",
-                parent:"base",
+                parent: "base",
                 templateUrl: "/app/components/home/HomeView.html",
-                controller:"HomeController"
-        });
+                controller: "HomeController"
+            });
         $urlRouterProvider.otherwise("/login");// neu khong phai truong hop nao thi tra ve login
     }
 
     function configAuthentication($httpProvider) {
         //interceptors quản trị việc tương tác giữa client và server
-        $httpProvider.interceptors.push(function ($q, $location) { 
+        $httpProvider.interceptors.push(function ($q, $location) {
             return {
                 request: function (config) {
-
                     return config;
                 },
                 requestError: function (rejection) {
-
                     return $q.reject(rejection);
                 },
                 response: function (response) {
@@ -50,7 +50,6 @@
                     return response;
                 },
                 responseError: function (rejection) {
-
                     if (rejection.status == "401") {
                         $location.path('/login');
                     }

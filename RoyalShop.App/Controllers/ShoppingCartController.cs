@@ -102,7 +102,11 @@ namespace RoyalShop.App.Controllers
         public JsonResult Add(int productId)
         {
             var cart = (List < ShoppingCartViewModel>)Session[CommonConstants.SessionCart] ;
-            if(cart.Any(x=>x.ProductId == productId))
+            if (cart == null)
+            {
+                cart = new List<ShoppingCartViewModel>();
+            }
+            if (cart.Any(x=>x.ProductId == productId))
             {
                 foreach(var item in cart)
                 {
@@ -114,6 +118,13 @@ namespace RoyalShop.App.Controllers
             }
             else
             {
+                //ShoppingCartViewModel newItem = new ShoppingCartViewModel();
+                //newItem.ProductId = productId;
+                //var product = _productService.GetById(productId);
+                //newItem.Product = Mapper.Map<Product, ProductViewModel>(product);
+                //newItem.Quantity = 1;
+                //cart.Add(newItem);
+
                 ShoppingCartViewModel newItem = new ShoppingCartViewModel();
                 newItem.ProductId = productId;
                 var product = _productService.GetById(productId);
