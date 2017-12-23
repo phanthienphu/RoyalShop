@@ -104,6 +104,10 @@
     <Compile Include="Migrations\201711301701350_AddGroupUser.Designer.cs">
       <DependentUpon>201711301701350_AddGroupUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712141806467_RevenuesStatisticSP.cs" />
+    <Compile Include="Migrations\201712141806467_RevenuesStatisticSP.Designer.cs">
+      <DependentUpon>201712141806467_RevenuesStatisticSP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -175,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711301701350_AddGroupUser.resx">
       <DependentUpon>201711301701350_AddGroupUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712141806467_RevenuesStatisticSP.resx">
+      <DependentUpon>201712141806467_RevenuesStatisticSP.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

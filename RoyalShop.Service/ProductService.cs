@@ -43,6 +43,8 @@ namespace RoyalShop.Service
 
         Tag GetTag(string tagId);
 
+        bool SellProduct(int productId, int quantity);
+
         void Save();
     }
 
@@ -243,6 +245,16 @@ namespace RoyalShop.Service
         public Tag GetTag(string tagId)
         {
             return _tagRepository.GetSingleByCondition(x => x.ID==tagId);
+        }
+
+        //Selling Product
+        public bool SellProduct(int productId, int quantity)
+        {
+            var product = _productRepository.GetSingleById(productId);
+            if (product.Quantity < quantity)
+                return false;
+            product.Quantity -= quantity;
+            return true;
         }
     }
 }

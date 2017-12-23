@@ -1,4 +1,5 @@
-﻿using RoyalShop.Data.Infrastructure;
+﻿using RoyalShop.Common.ViewModels;
+using RoyalShop.Data.Infrastructure;
 using RoyalShop.Data.Repositories;
 using RoyalShop.Model.Models;
 using System;
@@ -12,6 +13,7 @@ namespace RoyalShop.Service
     public interface IOrderService
     {
         bool Create(Order order,List<OrderDetail> orderDetail);
+        IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate);
     }
     public class OrderService : IOrderService
     {
@@ -46,5 +48,10 @@ namespace RoyalShop.Service
                 throw;
             }
         }
+
+        public IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate)
+        {
+            return _orderRepository.GetRevenueStatistic(fromDate, toDate)
+;        }
     }
 }

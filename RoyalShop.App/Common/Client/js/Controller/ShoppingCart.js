@@ -129,6 +129,8 @@
                     },2000);
                     
                 }
+                else
+                    $("#CartContent").html(response.message);
             }
         });
     },
