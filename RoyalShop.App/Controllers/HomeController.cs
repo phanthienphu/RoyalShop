@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RoyalShop.App.Models;
+using RoyalShop.Common;
 using RoyalShop.Model.Models;
 using RoyalShop.Service;
 using System;
@@ -30,7 +31,7 @@ namespace RoyalShop.App.Controllers
             var slideModel = _commonService.GetSlides();
             var slideView = Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(slideModel);
             var homeViewModel = new HomeViewModel();
-            homeViewModel.slides = slideView;
+            homeViewModel.slides = slideView;    
 
             var lastestProductModel = _productService.GetLastest(3);
             var topSaleProductModel = _productService.GetHotProduct(3);
@@ -39,6 +40,18 @@ namespace RoyalShop.App.Controllers
 
             homeViewModel.LastestProducts = lastestProductViewModel;
             homeViewModel.TopSaleProducts = topSaleProductViewModel;
+
+            try
+            {
+                homeViewModel.Title = _commonService.GetSystemConfig(CommonConstants.HomeTitle).ValueString;
+                homeViewModel.MetaKeyword = _commonService.GetSystemConfig(CommonConstants.HomeMeteKeyword).ValueString;
+                homeViewModel.MetaDescription = _commonService.GetSystemConfig(CommonConstants.HomeMetaDescription).ValueString;
+            }
+            catch(Exception ex)
+            {
+
+            }
+
             return View(homeViewModel);
         }
         

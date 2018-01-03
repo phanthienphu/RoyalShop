@@ -1,14 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
-    <link href="/Common//Client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <title>@ViewBag.Title</title>
+    <meta name="keywords" content="@ViewBag.MetaKeyword/>
+    <meta name="description" content="@ViewBag.MetaDescription"/>
+    @*<link href="/Common//Client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/Common/Client/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
-    <link href="/Common/Admin/libs/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />
+    <link href="/Common/Admin/libs/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />*@
     <!--theme-style-->
-    <link href="/Common//Client/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/Common/Client/css/custom.css" rel="stylesheet" />
+    @*<link href="/Common//Client/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Common/Client/css/custom.css" rel="stylesheet" />*@
     <!--//theme-style-->
+    @Styles.Render("~/css/base")
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!--fonts-->
@@ -26,14 +29,16 @@
     @{Html.RenderAction("Footer", "Home");}
     <div class="clearfix"> </div>
 
-    <script src="/Common//Client/js/jquery.min.js"></script>
+    @*<script src="/Common//Client/js/jquery.min.js"></script>
     <script src="/Common/Admin/libs/jquery-ui/jquery-ui.min.js"></script>
     <script src="/Common/Admin/libs/mustache/mustache.js"></script>
     <script src="/Common/Admin/libs/numeral/numeral.js"></script>
     <script src="/Common/Admin/libs/jquery-validation/dist/jquery.validate.js"></script>
     <script src="/Common/Admin/libs/jquery-validation/dist/additional-methods.min.js"></script>
-    <script src="/Common/Client/js/Common.js"></script>
+    <script src="/Common/Client/js/Common.js"></script>*@
     <!--script-->
+    @Scripts.Render("~js/jquery")
+    @Scripts.Render("~js/plugin")
     @RenderSection("FooterJS", required:false)
 </body>
 </html>

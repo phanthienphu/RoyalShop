@@ -1,6 +1,8 @@
 ﻿@model RoyalShop.App.Models.HomeViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Model.Title;
+    ViewBag.MetaKeyword = Model.Title;
+    ViewBag.MetaDescription = Model.Title;
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 

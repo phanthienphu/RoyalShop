@@ -1,7 +1,9 @@
 ﻿@model RoyalShop.App.Models.ProductViewModel
 
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = Model.Name;
+    ViewBag.MetaKeyword =Model.MetaKeyword;
+    ViewBag.MetaDescription = Model.MetaDescription;
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 <link href="~/Common/Client/css/etalage.css" rel="stylesheet" />

@@ -2,7 +2,10 @@
 
 @{
     var tag = (RoyalShop.App.Models.TagViewModel)ViewBag.keyword;
-    ViewBag.Title = "Kết quả tìm kiếm cho từ khoá: " + tag.Name;
+    var pageIndex = Model.Page;
+    ViewBag.Title = pageIndex==1? "Kết quả tìm kiếm cho từ khoá: " + tag.Name: "Kết quả tìm kiếm cho từ khoá: " + tag.Name+" - trang "+pageIndex;
+    ViewBag.MetaKeyword = pageIndex == 1 ? "Kết quả tìm kiếm cho từ khoá: " + tag.Name : "Kết quả tìm kiếm cho từ khoá: " + tag.Name + " - trang " + pageIndex;
+    ViewBag.MetaDescription = pageIndex == 1 ? "Kết quả tìm kiếm cho từ khoá: " + tag.Name : "Kết quả tìm kiếm cho từ khoá: " + tag.Name + " - trang " + pageIndex;
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 

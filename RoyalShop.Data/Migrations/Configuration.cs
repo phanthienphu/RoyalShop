@@ -26,7 +26,37 @@
             CreatePage(context);
             CreateContactDetail(context);
 
+            CreateConfigTitle(context);
+
             //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new RoyalShopDbContext()));
+        }
+
+        private void CreateConfigTitle(RoyalShopDbContext context)
+        {
+            if(!context.SystemConfigs.Any(x=>x.Code=="HomeTitle"))
+            {
+                context.SystemConfigs.Add(new SystemConfig()
+                {
+                    Code="HomeTitle",
+                    ValueString="Trang chủ RoyalShop"
+                });
+            }
+            if (!context.SystemConfigs.Any(x => x.Code == "HomeMetaKeyword"))
+            {
+                context.SystemConfigs.Add(new SystemConfig()
+                {
+                    Code = "HomeMetaKeyword",
+                    ValueString = "Trang chủ RoyalShop"
+                });
+            }
+            if (!context.SystemConfigs.Any(x => x.Code == "HomeMetaDescription"))
+            {
+                context.SystemConfigs.Add(new SystemConfig()
+                {
+                    Code = "HomeMetaDescription",
+                    ValueString = "Trang chủ RoyalShop"
+                });
+            }
         }
 
         private void CreateUser(RoyalShopDbContext context)

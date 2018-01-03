@@ -1,9 +1,13 @@
 ﻿@model RoyalShop.App.Infrastructure.Core.PaginationSet<RoyalShop.App.Models.ProductViewModel>
 
 @{
-    ViewBag.Title = "Category";
-    Layout = "~/Views/Shared/Layouts.cshtml";
     var category = (RoyalShop.App.Models.ProductCategoryViewModel)ViewBag.Category;
+    var pageIndex = Model.Page;
+    ViewBag.Title = pageIndex==1? category.Name:category.Name + " - trang "+pageIndex ;
+    ViewBag.MetaKeyword = pageIndex == 1 ? category.Name : category.MetaKeyword + " - trang " + pageIndex;
+    ViewBag.MetaDescription = pageIndex == 1 ? category.Name : category.MetaDescription + " - trang " + pageIndex;
+    Layout = "~/Views/Shared/Layouts.cshtml";
+
 }
 
 <div class="women-product">
