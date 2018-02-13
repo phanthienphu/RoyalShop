@@ -83,7 +83,26 @@
             if(isValid)
                 cart.createOrder();
         });
+
+        $('input[name="PaymentMethod"]').off('click').on('click', function () {
+            if($(this).val()=='NL')
+            {
+                $('.boxContent').hide();
+                $('#contentNganLuong').show();
+            }
+            else if ($(this).val() == 'ATM_ONLINE')
+            {
+                $('.boxContent').hide();
+                $('#contentBank').show();
+            }
+            else
+            {
+                $('#contentNganLuong').hide();
+                $('#contentBank').hide();
+            }
+        });
     },
+
     getLoginUser: function(){
         $.ajax({
             url: '/ShoppingCart/GetUser',
@@ -110,7 +129,8 @@
         CustomerEmail: $("#txtEmail").val(),
         CustomerMobile: $("#txtPhone").val(),
         CustomerMessage : $("#txtMessage").val(),
-        PaymentMethod: "Thanh toán tiền mặt_hệ thống tạo", 
+        PaymentMethod: $('input[name="PaymentMethod"]:checked').val(),
+        BankCode: $('input[groupname="bankcode"]:checked').prop("id"),
         Status: false,
         }
         $.ajax({
@@ -122,15 +142,24 @@
             },
             success: function (response) {
                 if (response.status) {
-                    $("#divCheckout").hide();
-                    cart.deleteAll();
-                    setTimeout(function () {
-                        $("#CartContent").html("Cảm ơn bạn đã đặt hàng! Chúng tôi sẽ duyệt đơn hàng và liên hệ sớm nhất!");
-                    },2000);
+                    if (response.urlCheckout != undefined && response.urlCheckout != "")
+                    {
+                        window.location.href = response.urlCheckout;
+                    }
+                    else
+                    {
+                        $("#divCheckout").hide();
+                        cart.deleteAll();
+                        setTimeout(function () {
+                            $("#CartContent").html("Cảm ơn bạn đã đặt hàng! Chúng tôi sẽ duyệt đơn hàng và liên hệ sớm nhất!");
+                        }, 2000);
+                    }
                     
                 }
-                else
-                    $("#CartContent").html(response.message);
+                eelse {
+                    $('#divMessage').show();
+                    $('#divMessage').text(response.message);
+                }
             }
         });
     },

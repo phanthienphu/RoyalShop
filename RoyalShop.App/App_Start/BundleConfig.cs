@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using RoyalShop.Common;
+using System.Web;
 using System.Web.Optimization;
 
 namespace RoyalShop.App
@@ -26,7 +27,8 @@ namespace RoyalShop.App
                 .Include("~/Common/Client/css/custom.css", new CssRewriteUrlTransform())
                 );
 
-            BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = bool.Parse(ConfigHelper.GetByKey("EnableBundles"));
         }
     }
 }

@@ -58,7 +58,7 @@ namespace RoyalShop.App.API
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
-            return CreateHttpResponse(request, () =>
+            Func<HttpResponseMessage> func = () =>
             {
                 var model = _productService.GetAll();
 
@@ -66,7 +66,9 @@ namespace RoyalShop.App.API
 
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 return response;
-            });
+            };
+
+            return CreateHttpResponse(request, func);
         }
 
         [Route("getbyid/{id:int}")]

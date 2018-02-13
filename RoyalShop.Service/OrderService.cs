@@ -12,8 +12,11 @@ namespace RoyalShop.Service
 {
     public interface IOrderService
     {
-        bool Create(Order order,List<OrderDetail> orderDetail);
+        Order Create(ref Order order,List<OrderDetail> orderDetail);
+        void UpdateStatus(int orderId);
         IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate);
+
+        void Save();
     }
     public class OrderService : IOrderService
     {
@@ -28,7 +31,7 @@ namespace RoyalShop.Service
             this._unitOfWork = unitOfWork;
         }
 
-        public bool Create(Order order, List<OrderDetail> orderDetails)
+        public Order Create(ref Order order, List<OrderDetail> orderDetails)
         {
             try
             {
@@ -41,7 +44,7 @@ namespace RoyalShop.Service
                     _orderDetailRepository.Add(orderDetail);
                 }
                 _unitOfWork.Commit();
-                return true;
+                return order;
             }
             catch (Exception ex)
             {
@@ -51,7 +54,19 @@ namespace RoyalShop.Service
 
         public IEnumerable<RevenueStatisticViewModel> GetRevenueStatistic(string fromDate, string toDate)
         {
-            return _orderRepository.GetRevenueStatistic(fromDate, toDate)
-;        }
+            return _orderRepository.GetRevenueStatistic(fromDate, toDate);
+        }
+
+        public void UpdateStatus(int orderId)
+        {
+            var order = _orderRepository.GetSingleById(orderId);
+            order.Status = true;
+            _orderRepository.Update(order);
+        }
+
+        public void Save()
+        {
+            _unitOfWork.Commit();
+        }
     }
 }

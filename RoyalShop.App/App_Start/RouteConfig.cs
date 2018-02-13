@@ -51,6 +51,20 @@ namespace RoyalShop.App
           );
 
             routes.MapRoute(
+              name: "Cancel Order",
+              url: "huy-don-hang.html",
+              defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+              namespaces: new string[] { "RoyalShop.App.Controllers" }
+          );
+
+            routes.MapRoute(
+             name: "Confirm Order",
+             url: "xac-nhan-don-hang.html",
+             defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+             namespaces: new string[] { "RoyalShop.App.Controllers" }
+         );
+
+            routes.MapRoute(
               name: "Contact",
               url: "lien-he.html",
               defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional },

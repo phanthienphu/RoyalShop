@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using RoyalShop.App.App_Start;
 using RoyalShop.App.Infrastructure.Extensions;
+using RoyalShop.App.Infrastructure.NganLuongAPI;
 using RoyalShop.App.Models;
 using RoyalShop.Common;
 using RoyalShop.Model.Models;
@@ -19,7 +20,11 @@ namespace RoyalShop.App.Controllers
     {
         IProductService _productService;
         IOrderService _orderService;
-        ApplicationUserManager _userManager;
+       private  ApplicationUserManager _userManager;
+
+        private string merchantId = ConfigHelper.GetByKey("MerchantId");
+        private string merchantPassword = ConfigHelper.GetByKey("MerchantPassword");
+        private string merchantEmail = ConfigHelper.GetByKey("MerchantEmail");
         public ShoppingCartController(IOrderService orderService,IProductService productService, ApplicationUserManager userManager)
         {
             this._productService = productService;
@@ -61,12 +66,12 @@ namespace RoyalShop.App.Controllers
         public JsonResult CreateOrder(string orderViewModel)
         {
             var order = new JavaScriptSerializer().Deserialize<OrderViewModel>(orderViewModel);
-            var orderMap = new Order();
-            orderMap.UpdateOrder(order);
+            var orderNew = new Order();
+            orderNew.UpdateOrder(order);
             if(Request.IsAuthenticated)
             {
-                orderMap.CustomerId = User.Identity.GetUserId();
-                orderMap.CreatedBy = User.Identity.GetUserName();
+                orderNew.CustomerId = User.Identity.GetUserId();
+                orderNew.CreatedBy = User.Identity.GetUserName();
             }
             var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
             List<OrderDetail> orderDetails = new List<OrderDetail>();
@@ -85,9 +90,55 @@ namespace RoyalShop.App.Controllers
 
             if(isEnough)
             {
-                _orderService.Create(orderMap, orderDetails);
+                var orderReturn =_orderService.Create(ref orderNew, orderDetails);
                 _productService.Save();
-                return Json(new { status = true });
+
+                if (order.PaymentMethod == "CASH")
+                    return Json(new { status = true });
+                else
+                {
+                    var currentLink = ConfigHelper.GetByKey("CurrentLink");
+
+                    RequestInfo info = new RequestInfo();
+                    info.Merchant_id = merchantId;
+                    info.Merchant_password = merchantPassword;
+                    info.Receiver_email = merchantEmail;
+
+
+
+                    info.cur_code = "vnd";
+                    info.bank_code = order.BankCode;
+
+                    info.Order_code = orderReturn.ID.ToString();
+                    info.Total_amount = orderDetails.Sum(x => x.Quantity * x.Price).ToString();
+                    info.fee_shipping = "0";
+                    info.Discount_amount = "0";
+                    info.order_description = "Thanh toán đơn hàng tại TeduShop";
+                    info.return_url = currentLink + "xac-nhan-don-hang.html";
+                    info.cancel_url = currentLink + "huy-don-hang.html";
+
+                    info.Buyer_fullname = order.CustomerName;
+                    info.Buyer_email = order.CustomerEmail;
+                    info.Buyer_mobile = order.CustomerMobile;
+
+                    APICheckoutV3 objNLChecout = new APICheckoutV3();
+                    ResponseInfo result = objNLChecout.GetUrlCheckout(info, order.PaymentMethod);
+                    if (result.Error_code == "00")
+                    {
+                        return Json(new
+                        {
+                            status = true,
+                            urlCheckout = result.Checkout_url,
+                            message = result.Description
+                        });
+                    }
+                    else
+                        return Json(new
+                        {
+                            status = false,
+                            message = result.Description
+                        });
+                }
             }
             else
                 return Json(new { status = false,message="Không đủ hàng!" });
@@ -204,6 +255,37 @@ namespace RoyalShop.App.Controllers
             {
                 status = true
             });
+        }
+
+        public ActionResult ConfirmOrder()
+        {
+            string token = Request["token"];
+            RequestCheckOrder info = new RequestCheckOrder();
+            info.Merchant_id = merchantId;
+            info.Merchant_password = merchantPassword;
+            info.Token = token;
+            APICheckoutV3 objNLChecout = new APICheckoutV3();
+            ResponseCheckOrder result = objNLChecout.GetTransactionDetail(info);
+            if (result.errorCode == "00")
+            {
+                //update status order
+                _orderService.UpdateStatus(int.Parse(result.order_code));
+                _orderService.Save();
+                ViewBag.IsSuccess = true;
+                ViewBag.Result = "Thanh toán thành công. Chúng tôi sẽ liên hệ lại sớm nhất.";
+            }
+            else
+            {
+                ViewBag.IsSuccess = true;
+                ViewBag.Result = "Có lỗi xảy ra. Vui lòng liên hệ admin.";
+            }
+
+            return View();
+        }
+
+        public ActionResult CancelOeder()
+        {
+            return View();
         }
     }
 }
