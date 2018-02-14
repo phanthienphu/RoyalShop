@@ -24,6 +24,7 @@
             <a class="forgot" href="#">Forgot Your Password?</a>
             <input type="submit" value="Login">
         }
+        @Html.Partial("_ExternalLoginsListPartial", new RoyalShop.App.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
     </div>
     <div class="login-left">
         <h3>Chưa có tải khoản</h3>

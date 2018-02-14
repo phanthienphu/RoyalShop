@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security.Google;
 
 [assembly: OwinStartup(typeof(RoyalShop.App.App_Start.Startup))]
 
@@ -47,7 +48,7 @@ namespace RoyalShop.App.App_Start
                     // This is a security feature which is used when you change a password or add an external login to your account.  
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager,DefaultAuthenticationTypes.ApplicationCookie))
                 }
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
@@ -61,15 +62,15 @@ namespace RoyalShop.App.App_Start
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "184033472358679",
+               appSecret: "d6abfa6ab00b401af7f2d672e9ae218d");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "473012655961-rmgbeecsrdo4pa7aivpd47bumbg5i6er.apps.googleusercontent.com",
+                ClientSecret = "iMGHlfIwcwo4Q5icfffmd9E-"
+            });
         }
 
         public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
