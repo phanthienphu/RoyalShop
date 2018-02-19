@@ -6,6 +6,7 @@ using RoyalShop.Model.Models;
 using RoyalShop.Service;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -129,7 +130,26 @@ namespace RoyalShop.App.API
                     dbPorductCategory.UpdateProductCategory(productCategoryVM);
                     dbPorductCategory.UpdatedDate = DateTime.Now;
                     _productCategoryService.Update(dbPorductCategory);
-                    _productCategoryService.Save();
+
+                    try
+                    {
+                        _productCategoryService.Save();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        foreach (var eve in e.EntityValidationErrors)
+                        {
+                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                            foreach (var ve in eve.ValidationErrors)
+                            {
+                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                    ve.PropertyName, ve.ErrorMessage);
+                            }
+                        }
+                        throw;
+                    }
+                    
                     var responseDate = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbPorductCategory);
                     response = request.CreateResponse(HttpStatusCode.OK, responseDate);
                 }

@@ -5,7 +5,7 @@
           "royalshop.product_categories",
           'royalshop.application_roles',
          'royalshop.application_users',
-          'royalshop.statistic',
+          'royalshop.statistics',
           "royalshop.common"])
           .config(config)
            .config(configAuthentication);

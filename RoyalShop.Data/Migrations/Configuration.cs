@@ -27,6 +27,8 @@
             CreateContactDetail(context);
 
             CreateConfigTitle(context);
+            CreateFooter(context);
+            CreateUser(context);
 
             //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new RoyalShopDbContext()));
         }
@@ -61,29 +63,35 @@
 
         private void CreateUser(RoyalShopDbContext context)
         {
-            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new RoyalShopDbContext()));
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new RoyalShopDbContext()));
 
-            //var user = new ApplicationUser()
-            //{
-            //    UserName = "PhanThienPhu",
-            //    Email = "phanthienphu199@gmail.com",
-            //    EmailConfirmed = true,
-            //    BirthDay = DateTime.Now,
-            //    FullName = "PhanThienPhu"
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new RoyalShopDbContext()));
 
-            //};
 
-            //manager.Create(user, "123654$");
+            var user = new ApplicationUser()
+            {
+                UserName = "PhanThienPhu",
+                Email = "phanthienphu199@gmail.com",
+                EmailConfirmed = true,
+                BirthDay = DateTime.Now,
+                FullName = "PhanThienPhu"
 
-            //if (!roleManager.Roles.Any())
-            //{
-            //    roleManager.Create(new IdentityRole { Name = "Admin" });
-            //    roleManager.Create(new IdentityRole { Name = "User" });
-            //}
+            };
+            if(manager.Users.Count(x=>x.UserName=="royal")==0)
+            {
+                manager.Create(user, "123654$");
 
-            //var adminUser = manager.FindByEmail("phanthienphu199@gmail.com");
+                if (!roleManager.Roles.Any())
+                {
+                    roleManager.Create(new IdentityRole { Name = "Admin" });
+                    roleManager.Create(new IdentityRole { Name = "User" });
+                }
 
-            //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+                var adminUser = manager.FindByEmail("phanthienphu199@gmail.com");
+
+                manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+            }
+           
         }
 
         private void CreateProductCategorySample(RoyalShop.Data.RoyalShopDbContext context)
@@ -107,7 +115,13 @@
         {
             if(context.Footers.Count(x => x.ID == CommonConstants.DefaultFooterId) == 0)
             {
-                string content = "";
+                string content = "Footer";
+                context.Footers.Add(new Footer()
+                {
+                    ID=CommonConstants.DefaultFooterId,
+                    Content=content
+                });
+                context.SaveChanges();
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿(function (app) {
     'use strict';
-    app.service('loginService', ['$http', '$q', 'authenticationService', 'authData',
-    function ($http, $q, authenticationService, authData) {
+    app.service('loginService', ['$http', '$q', 'authenticationService', 'authData','apiService',
+    function ($http, $q, authenticationService, authData, apiService) {
         var userInfo;
         var deferred;
 
@@ -13,7 +13,7 @@
                    { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).then(function (response) {
                 userInfo = {
-                    accessToken: response.access_token,
+                    accessToken: response.data.access_token,
                     userName: userName
                 };
                 authenticationService.setTokenInfo(userInfo);
@@ -29,9 +29,14 @@
         }
 
         this.logOut = function () {
-            authenticationService.removeToken();
-            authData.authenticationData.IsAuthenticated = false;
-            authData.authenticationData.userName = "";
+            apiService.post('/api/account/logout', null, function (response) {
+                authenticationService.removeToken();
+                authData.authenticationData.IsAuthenticated = false;
+                authData.authenticationData.userName = "";
+                authData.authenticationData.accessToken = "";
+
+            }, null);
+
         }
     }]);
 })(angular.module('royalshop.common'));
