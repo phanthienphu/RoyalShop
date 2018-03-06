@@ -12,7 +12,7 @@
             $state.go('login');
         }
         $scope.authentication = authData.authenticationData;
-
+        $scope.sideBar = "/app/shared/views/SideBar.html";
         //authenticationService.validateRequest();
     }
 })(angular.module('royalshop'));

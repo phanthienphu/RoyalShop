@@ -1,5 +1,15 @@
 ﻿/// <reference path="\Common/Admin/libs/angular/angular.js" />
 
 (function () {
-    angular.module("royalshop.common", ["ui.router", "ngBootbox", "ngCkeditor", "checklist-model", "LocalStorageModule","chart.js"])
+    angular.module("royalshop.common",
+        [
+          "ui.router",
+          "ngBootbox",
+          "ngCkeditor",
+          "checklist-model",
+          "LocalStorageModule",
+          "chart.js",
+          "ui.select",
+          "ngSanitize"
+        ])
 })();

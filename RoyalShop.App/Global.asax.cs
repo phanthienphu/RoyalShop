@@ -1,4 +1,6 @@
-﻿using RoyalShop.App.Mappings;
+﻿using RoyalShop.App.Infrastructure.Core;
+using RoyalShop.App.Mappings;
+using RoyalShop.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,9 @@ namespace RoyalShop.App
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //get an instance of service
+            //IFeedbackService service = ServiceFactory.Get<IFeedbackService>();
         }
     }
 }

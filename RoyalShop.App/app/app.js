@@ -3,6 +3,7 @@
     angular.module("royalshop",
         ["royalshop.products",
           "royalshop.product_categories",
+          'royalshop.application_groups',
           'royalshop.application_roles',
          'royalshop.application_users',
           'royalshop.statistics',

@@ -96,6 +96,8 @@
                     pageSize: 20
                 }
             }
+
+            $scope.loading = true;
             //url web API
             apiService.get("/api/productcategory/getall", config, function (resuilt) {
                 if (resuilt.data.TotalCount == 0)
@@ -106,8 +108,10 @@
                 $scope.page = resuilt.data.Page;
                 $scope.pagesCount = resuilt.data.TotalPages;
                 $scope.totalCount = resuilt.data.TotalCount;
+                $scope.loading = false;
             }, function () {
                 console.log("Load productcategory failed!");
+                $scope.loading = false;
             });
         }
 

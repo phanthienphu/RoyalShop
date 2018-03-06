@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.Google;
+using RoyalShop.App.Infrastructure.Core;
+using RoyalShop.Service;
+using System.Linq;
+using RoyalShop.Common;
 
 [assembly: OwinStartup(typeof(RoyalShop.App.App_Start.Startup))]
 
@@ -102,10 +106,25 @@ namespace RoyalShop.App.App_Start
                 }
                 if (user != null)
                 {
-                    ClaimsIdentity identity = await userManager.CreateIdentityAsync(
-                                                           user,
-                                                           DefaultAuthenticationTypes.ExternalBearer);
-                    context.Validated(identity);
+                    //ClaimsIdentity identity = await userManager.CreateIdentityAsync(
+                    //                                       user,
+                    //                                       DefaultAuthenticationTypes.ExternalBearer);
+                    //context.Validated(identity);
+
+                    //var applicationGroupService = ServiceFactory.Get<IApplicationGroupService>();
+                    //var listGroup = applicationGroupService.GetListGroupByUserId(user.Id);
+                    //if (listGroup.Any(x => x.Name == CommonConstants.Administrator))
+                    //{
+                        ClaimsIdentity identity = await userManager.CreateIdentityAsync(
+                                       user,
+                                       DefaultAuthenticationTypes.ExternalBearer);
+                        context.Validated(identity);
+                    //}
+                    //else
+                    //{
+                    //    context.Rejected();
+                    //    context.SetError("invalid_group", "Bạn không phải là admin");
+                    //}
                 }
                 else
                 {

@@ -12,13 +12,13 @@
             Status: true
         }
 
-        $scope.AddProductCategory = AddProductCategory;
-
+        $scope.flatFolders = [];
         $scope.GetSeoTitle = GetSeoTitle;
-
         function GetSeoTitle() {
             $scope.productCategory.Alias = commonService.getSeoTitle($scope.productCategory.Name);
         }
+
+        $scope.AddProductCategory = AddProductCategory;
 
         function AddProductCategory() {
             apiService.post("/api/productcategory/create", $scope.productCategory, function (resuilt) {
@@ -31,11 +31,35 @@
 
         function loadParentCategory() {
             apiService.get("/api/productcategory/getallparents", null, function (resuilt) {
-                $scope.parentCategories = resuilt.data;
+                $scope.parentCategories = commonService.getTree(resuilt.data, "ID", "ParentID");
+                $scope.parentCategories.forEach(function (item) {
+                    recur(item, 0, $scope.flatFolders);
+                });
             }, function () {
                 console.log("cannot get list parent!");
             });
         }
+
+        function times(n, str) {
+            var result = '';
+            for (var i = 0; i < n; i++) {
+                result += str;
+            }
+            return result;
+        };
+        function recur(item, level, arr) {
+            arr.push({
+                Name: times(level, '–') + ' ' + item.Name,
+                ID: item.ID,
+                Level: level,
+                Indent: times(level, '–')
+            });
+            if (item.children) {
+                item.children.forEach(function (item) {
+                    recur(item, level + 1, arr);
+                });
+            }
+        };
 
         loadParentCategory();
     }
