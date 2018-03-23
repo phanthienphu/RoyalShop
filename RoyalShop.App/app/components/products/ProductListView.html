@@ -39,6 +39,7 @@
                     <button class="btn btn-primary" ui-sref="product_import">Nhập</button>
                     <button class="btn btn-success" ui-sref="product_add">Thêm mới</button>
                     <button class="btn btn-danger" ng-click="DeleteMultiple()" id="btnDelete" disabled>Xoá</button>
+                    <button class="btn btn-default" ng-click="ExportExcel()">Xuất  excel</button>
                 </div>
             </div>
             <div class="row">
@@ -63,6 +64,7 @@
                                 </span>
                             </td>
                             <td>
+                                <button class="btn btn-sm btn-default" ng-click="ExportPdf(item.ID)"><i class="fa fa-file-excel-o"></i></button>
                                 <button class="btn btn-sm btn-primary" ui-sref="product_edit({id:item.ID})"><i class="fa fa-pencil"></i></button>
                                 <button class="btn btn-sm btn-danger" ng-click="deleteProduct(item.ID)"><i class="fa fa-trash"></i></button>
                             </td>

@@ -29,6 +29,8 @@ namespace RoyalShop.Service
 
         IEnumerable<Product> Search(string keyword, int page, int pageSize, string sort, out int totalRow);
 
+        IEnumerable<Product> GetListProduct(string keyword);
+
         IEnumerable<Product> GetReatedProducts(int id, int top);
 
         IEnumerable<string> GetListProductByName(string name);
@@ -255,6 +257,16 @@ namespace RoyalShop.Service
                 return false;
             product.Quantity -= quantity;
             return true;
+        }
+
+        public IEnumerable<Product> GetListProduct(string keyword)
+        {
+            IEnumerable<Product> query;
+            if (string.IsNullOrEmpty(keyword))
+                query = _productRepository.GetMulti(x => x.Status && x.Name.Contains(keyword));
+            else
+                query = _productRepository.GetAll();
+            return query;
         }
     }
 }
